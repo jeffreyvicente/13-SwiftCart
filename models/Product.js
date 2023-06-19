@@ -14,7 +14,7 @@ Product.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      AutoIncrement: true,
+      autoIncrement: true,
     },
     product_name: {
       type: DataTypes.STRING,
@@ -26,7 +26,6 @@ Product.init(
       validate: {
         isDecimal: true,
       },
-
     },
     stock: {
       type: DataTypes.INTEGER,
