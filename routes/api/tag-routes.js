@@ -97,4 +97,5 @@ router.delete('/:id',async (req, res) => {
   }
 });
 
+// Exporting the router model
 module.exports = router;

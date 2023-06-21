@@ -1,5 +1,7 @@
+// Importing the Category model and assigning it to the constant Category
 const { Category } = require('../models');
 
+// Data to be seed into the database
 const categoryData = [
   {
     category_name: 'Shirts',
@@ -20,4 +22,5 @@ const categoryData = [
 
 const seedCategories = () => Category.bulkCreate(categoryData);
 
+// Exporting the seedCategories model
 module.exports = seedCategories;

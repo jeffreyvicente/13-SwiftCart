@@ -1,5 +1,7 @@
+// Importing the ProductTag model and assigning it to the constant ProductTag
 const { ProductTag } = require('../models');
 
+// Data to be seed into the database
 const productTagData = [
   {
     product_id: 1,
@@ -53,4 +55,5 @@ const productTagData = [
 
 const seedProductTags = () => ProductTag.bulkCreate(productTagData);
 
+// Exporting the seedCategories model
 module.exports = seedProductTags;

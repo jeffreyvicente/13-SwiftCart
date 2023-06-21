@@ -1,5 +1,7 @@
+// Importing the Category model and assigning it to the constant Category
 const { Tag } = require('../models');
 
+// Data to be seed into the database
 const tagData = [
   {
     tag_name: 'rock music',
@@ -29,4 +31,5 @@ const tagData = [
 
 const seedTags = () => Tag.bulkCreate(tagData);
 
+// Exporting the seedCategories model
 module.exports = seedTags;
