@@ -1,13 +1,15 @@
-
+// Creates an instance of Express router
 const router = require('express').Router();
+
+// Importing the Category, Tag, Category and Product models
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
 // get all products
 router.get('/', async(req, res) => {
-  // find all products
-  // be sure to include its associated Category and Tag data
+  // Finds all products
+  // Include its associated Category and Tag data
   try{
     const productData = await Product.findAll({
       include:[Category, Tag]
@@ -21,15 +23,16 @@ router.get('/', async(req, res) => {
 
 });
 
-// get one product
+// Gets one product
 router.get('/:id', async(req, res) => {
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+  // Find a single product by its `id`
+  // Includes its associated Category and Tag data
   try{
     const productData = await Product.findByPk(req.params.id,{
       include:[Category, Tag]
     });
 
+    //Checks if the product is part of the database
     if(!productData){
       res.status(404).json({message: 'No Product found with this id!'});
     }
@@ -42,7 +45,7 @@ router.get('/:id', async(req, res) => {
 
 });
 
-// create new product
+// Creates new product
 router.post('/', (req, res) => {
 
   Product.create(req.body)
@@ -113,7 +116,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', async(req, res) => {
-  // delete one product by its `id` value
+  // Deletes one product by its `id` value
   try{
     const productData = await Product.destroy({
       where:{
@@ -121,6 +124,7 @@ router.delete('/:id', async(req, res) => {
       }
     });
   
+    //Checks if the product is part of the database
     if(!productData){
       res.status(404).json({message: 'No product found with this id!'});
       
@@ -134,4 +138,5 @@ router.delete('/:id', async(req, res) => {
  
 });
 
+// Exporting the router model
 module.exports = router;

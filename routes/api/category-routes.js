@@ -1,11 +1,13 @@
+// Imports the Router class
 const router = require('express').Router();
+// Importing the Category and Product models
 const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
 router.get('/', async (req, res) => {
-  // find all categories
-  // be sure to include its associated Products
+  // Finds all categories
+  // Includes its associated Products
   try {
     const categoryData = await Category.findAll({
       include:[Product]
@@ -17,13 +19,14 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  // find one category by its `id` value
-  // be sure to include its associated Products
+  // Finds one category by its `id` value
+  // Include its associated Products
   try {
     const categoryData = await Category.findByPk(req.params.id,{
       include:[Product]
     });
 
+    //Checks if the category is part of the database
     if (!categoryData){
       res.status(404).json({message: 'No category found with this id!'});
       return;
@@ -35,7 +38,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  // create a new category
+  // Creates a new category
   try{
     const categoryData = await Category.create(req.body);
     res.status(200).json(categoryData);
@@ -45,7 +48,7 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-  // update a category by its `id` value
+  // Updates a category by its `id` value
   try{
     const categoryData = await Category.update(req.body,{
       where: {
@@ -53,6 +56,7 @@ router.put('/:id', async (req, res) => {
       },
     });
     
+    //Checks if the category is part of the database
     if (!categoryData[0]) {
       res.status(404).json({ message: 'Category not found' });
       return;
@@ -73,6 +77,7 @@ router.delete('/:id', async(req, res) => {
       }
     });
 
+    //Checks if the category is part of the database
     if(!categoryData) {
       res.status(404).json({message: 'No category found with this id!!'});
       return;
@@ -85,4 +90,5 @@ router.delete('/:id', async(req, res) => {
   }
 });
 
+// Exporting the router model
 module.exports = router;

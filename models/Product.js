@@ -9,7 +9,7 @@ class Product extends Model {}
 // set up fields and rules for Product model
 Product.init(
   {
-    // define columns
+    // Defines the database columns
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -45,12 +45,15 @@ Product.init(
     },
   },
   {
+    // Assigning the Sequelize instance to the 'sequelize' property
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
+    // Setting the model name to 'product'
     modelName: 'product',
   }
 );
 
+// Exporting the Product model
 module.exports = Product;

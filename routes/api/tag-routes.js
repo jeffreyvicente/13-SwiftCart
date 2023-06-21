@@ -1,11 +1,14 @@
+// Creates an instance of Express router
 const router = require('express').Router();
+
+// Importing the Tag, ProductTag and Product models
 const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
 
 router.get('/', async(req, res) => {
-  // find all tags
-  // be sure to include its associated Product data
+  // Finds all tags
+  // Include its associated Product data
   try {
     const tagData = await Tag.findAll({
       include: [Product]
@@ -17,13 +20,14 @@ router.get('/', async(req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  // find a single tag by its `id`
-  // be sure to include its associated Product data
+  // Find a single tag by its `id`
+  // Include its associated Product data
   try {
     const tagData = await Tag.findByPk(req.params.id, {
       include: [Product]
     });
 
+    //Checks if the Tag is part of the database
     if(!tagData){
       res.status(404).json({message: 'No Tag found with this id!'});
       return;
@@ -36,7 +40,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async(req, res) => {
-  // create a new tag
+  // Creates a new tag
   try {
 
     const tagData = await Tag.create(req.body);
@@ -49,7 +53,7 @@ router.post('/', async(req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-  // update a tag's name by its `id` value
+  // Updates a tag's name by its `id` value
   try {
 
     const tagData = await Tag.update(req.body,{
@@ -58,6 +62,7 @@ router.put('/:id', async (req, res) => {
       },
     });
 
+    //Checks if the Tag is part of the database
     if (!tagData[0]) {
       res.status(404).json({ message: 'Category not found' });
       return;
@@ -71,7 +76,7 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id',async (req, res) => {
-  // delete on tag by its `id` value
+  // Deletes on tag by its `id` value
   try {
     const tagData = await Tag.destroy({
       where: {
@@ -79,6 +84,7 @@ router.delete('/:id',async (req, res) => {
       }
     });
 
+    //Checks if the Tag is part of the database
     if(!tagData){
       res.status(404).json({message: 'No tag found with this id!'});
       return;
